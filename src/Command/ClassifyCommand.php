@@ -59,8 +59,13 @@ class ClassifyCommand extends Command
             $sourceFile = $source . DIRECTORY_SEPARATOR . $object['path'];
             if (in_array($object['extension'], $this->exifExtensions)) {
                 $exif = @exif_read_data($sourceFile);
+                // use FileDateTime first
                 if (isset($exif['FileDateTime'])) {
                     $folder = date('Y-m', $exif['FileDateTime']);
+                }
+                // if original exist
+                if (isset($exif['DateTimeOriginal'])) {
+                    $folder = date('Y-m', strtotime($exif['DateTimeOriginal']));
                 }
             }
             $targetFile = $target . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $object['filename'] . '.' . $object['extension'];

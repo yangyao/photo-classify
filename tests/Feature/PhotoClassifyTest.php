@@ -1,6 +1,6 @@
 <?php
 
-namespace PhotoClassifyTest\Unit;
+namespace PhotoClassifyTest\Feature;
 
 
 use PHPUnit\Framework\TestCase;
@@ -30,12 +30,12 @@ class PhotoClassifyTest extends TestCase
         $target =  __DIR__.'/../resources/target/';
         $this->commandTester->execute(['source' =>$source,'target'=>$target]);
 
-        $filename = $target.'2019-03/test-image.jpg';
+        $filename = $target.'2016-06/test-image.jpg';
 
         $this->assertFileExists($filename);
 
         @unlink($filename);
-        @rmdir($target.'2019-03');
+        @rmdir($target.'2016-06');
     }
 
 
